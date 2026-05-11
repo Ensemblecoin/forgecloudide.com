@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ForgeCloud IDE">
+  <rect width="64" height="64" rx="14" fill="#05080e"/>
+  <path d="M14 40V24l18-10 18 10v16L32 50 14 40Z" fill="#0ea5e9" opacity=".9"/>
+  <path d="M22 36V28l10-6 10 6v8l-10 6-10-6Z" fill="#8b5cf6"/>
+  <path d="M32 22v20M22 28l20 8M42 28l-20 8" stroke="#e0f2fe" stroke-width="3" stroke-linecap="round"/>
+</svg>
