@@ -4,11 +4,83 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#05080e" />
-    <meta name="description" content="ForgeCloud IDE is an AI cloud workspace for building, previewing, and deploying real apps." />
+    <meta name="description" content="ForgeCloud IDE is the AI cloud workspace for building, previewing, and deploying real apps." />
     <title>ForgeCloud IDE</title>
+    <style>
+      :root { color-scheme: dark; --bg:#05080e; --panel:#0f172a; --border:rgba(148,163,184,.2); --text:#f8fafc; --muted:#94a3b8; --cyan:#22d3ee; --violet:#8b5cf6; --green:#22c55e; }
+      * { box-sizing: border-box; }
+      body { margin:0; min-width:320px; color:var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: radial-gradient(circle at 20% 0%, rgba(34,211,238,.2), transparent 32%), radial-gradient(circle at 80% 10%, rgba(139,92,246,.22), transparent 30%), linear-gradient(180deg,#0f172a 0%,var(--bg) 46%); }
+      a { color: inherit; text-decoration: none; }
+      .shell { width:min(1180px, calc(100% - 32px)); margin:0 auto; }
+      nav { min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+      .brand { display:flex; align-items:center; gap:10px; font-weight:900; }
+      .mark { width:34px; height:34px; border-radius:9px; display:grid; place-items:center; background:linear-gradient(135deg,#0ea5e9,#8b5cf6); box-shadow:0 16px 42px rgba(14,165,233,.28); }
+      .links { display:flex; align-items:center; gap:14px; color:var(--muted); font-size:.92rem; }
+      .btn { min-height:42px; border:1px solid rgba(34,211,238,.42); border-radius:8px; display:inline-flex; align-items:center; justify-content:center; padding:0 15px; background:linear-gradient(135deg,rgba(14,165,233,.95),rgba(124,58,237,.92)); color:white; font-weight:800; }
+      .btn.secondary { background:rgba(15,23,42,.82); border-color:var(--border); color:var(--text); }
+      .hero { min-height:calc(100vh - 72px); display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,.82fr); align-items:center; gap:32px; padding:40px 0 80px; }
+      .eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--cyan); text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; font-weight:900; }
+      h1 { margin:16px 0; max-width:760px; font-size:clamp(3rem,7vw,6.6rem); line-height:.95; letter-spacing:0; }
+      .hero p { max-width:670px; color:#cbd5e1; font-size:1.08rem; line-height:1.7; }
+      .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+      .metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:34px; }
+      .metric, .panel, .card { border:1px solid var(--border); border-radius:8px; background:rgba(15,23,42,.78); box-shadow:0 28px 80px rgba(0,0,0,.25); }
+      .metric { padding:15px; display:grid; gap:4px; }
+      .metric strong { font-size:1.6rem; }
+      .metric span, .card p, .panel p, footer { color:var(--muted); }
+      .ide { min-height:540px; overflow:hidden; display:grid; grid-template-rows:42px minmax(0,1fr); }
+      .toolbar { display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); padding:0 14px; background:rgba(2,6,23,.7); }
+      .dot { width:11px; height:11px; border-radius:50%; background:#ef4444; } .dot:nth-child(2){background:#f59e0b}.dot:nth-child(3){background:#22c55e}
+      .toolbar span { margin-left:8px; color:#cbd5e1; font-size:.85rem; }
+      .ide-body { display:grid; grid-template-columns:150px minmax(0,1fr); }
+      .files { border-right:1px solid var(--border); padding:14px; display:grid; align-content:start; gap:9px; color:#94a3b8; background:rgba(2,6,23,.48); font-size:.86rem; }
+      .file.active { color:var(--cyan); }
+      .editor { padding:18px; font-family:"SFMono-Regular",Consolas,monospace; color:#dbeafe; font-size:.9rem; line-height:1.7; overflow:auto; }
+      .line { display:grid; grid-template-columns:34px minmax(0,1fr); gap:12px; } .line b { color:#64748b; font-weight:400; text-align:right; }
+      .cyan { color:#67e8f9; } .violet { color:#c4b5fd; } .green { color:#86efac; }
+      .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; padding:0 0 70px; }
+      .card { padding:18px; }
+      .card h3 { margin:10px 0 8px; }
+      .status { color:#86efac; }
+      footer { border-top:1px solid var(--border); padding:24px 0 40px; }
+      @media (max-width:900px){ .links{display:none}.hero,.grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.hero{min-height:auto}.ide-body{grid-template-columns:1fr}.files{display:none} }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="shell">
+      <nav>
+        <a class="brand" href="/"><span class="mark">◆</span><span>ForgeCloud IDE</span></a>
+        <div class="links"><a href="#workspace">Workspace</a><a href="#deploy">Deploy</a><a href="https://github.com/Ensemblecoin/forgecloudide.com">GitHub</a></div>
+        <a class="btn" href="https://github.com/Ensemblecoin/forgecloudide.com">View Repo</a>
+      </nav>
+      <main class="hero">
+        <section>
+          <span class="eyebrow">AI cloud workspace</span>
+          <h1>Build, Preview, and Deploy Apps with an AI Cloud IDE.</h1>
+          <p>ForgeCloud IDE combines an AI app builder, browser-based coding workspace, launch readiness checks, GitHub Pages deployment, and backend production planning for founders building real software.</p>
+          <div class="actions"><a class="btn" href="https://github.com/Ensemblecoin/forgecloudide.com">Start from GitHub</a><a class="btn secondary" href="#deploy">Deployment status</a></div>
+          <div class="metrics"><div class="metric"><strong>React</strong><span>Frontend source pushed</span></div><div class="metric"><strong>Node</strong><span>Backend server included</span></div><div class="metric"><strong>GitHub</strong><span>Pages domain connected</span></div></div>
+        </section>
+        <section class="panel ide" id="workspace">
+          <div class="toolbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>forgecloudide.com / app</span></div>
+          <div class="ide-body">
+            <div class="files"><span class="file active">src/App.tsx</span><span>server/index.mjs</span><span>package.json</span><span>.github/workflows/pages.yml</span><span>public/CNAME</span></div>
+            <div class="editor">
+              <div class="line"><b>01</b><span><span class="violet">const</span> product = <span class="green">"ForgeCloud IDE"</span></span></div>
+              <div class="line"><b>02</b><span><span class="violet">const</span> domain = <span class="green">"www.forgecloudide.com"</span></span></div>
+              <div class="line"><b>03</b><span><span class="cyan">deploy</span>({ target: <span class="green">"GitHub Pages"</span> })</span></div>
+              <div class="line"><b>04</b><span><span class="cyan">connectBackend</span>({ provider: <span class="green">"Railway / Cloud Run"</span> })</span></div>
+              <div class="line"><b>05</b><span><span class="cyan">launch</span>({ status: <span class="green">"source pushed"</span> })</span></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <section class="grid" id="deploy">
+        <article class="card"><span class="status">Live</span><h3>Custom Domain</h3><p>DNS for www.forgecloudide.com points to GitHub Pages. HTTPS may take time to finish provisioning in GitHub settings.</p></article>
+        <article class="card"><span class="status">Ready</span><h3>Application Source</h3><p>The repository includes package.json, Vite/React source, a Node server, and Pages workflow configuration.</p></article>
+        <article class="card"><span class="status">Next</span><h3>Backend Deploy</h3><p>Deploy the Node API on Railway, Render, Cloud Run, or Fly.io, then set VITE_API_BASE_URL for the frontend build.</p></article>
+      </section>
+      <footer>© 2026 Ensemblecoin. ForgeCloud IDE is where AI app generation meets professional cloud development.</footer>
+    </div>
   </body>
 </html>
