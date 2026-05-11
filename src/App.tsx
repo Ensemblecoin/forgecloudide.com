@@ -1,11 +1,10 @@
 import { useMemo, useState } from 'react'
+import type { LucideIcon } from 'lucide-react'
 import {
-  Activity,
   Bot,
   CheckCircle2,
   Cloud,
   Code2,
-  Database,
   FileCode2,
   GitBranch,
   Globe2,
@@ -20,7 +19,6 @@ import {
   ShieldCheck,
   Sparkles,
   Store,
-  Users,
   Zap,
 } from 'lucide-react'
 import './App.css'
@@ -54,14 +52,14 @@ const code = [
   '}',
 ]
 
-const templates = [
+const templates: Array<[string, string, string]> = [
   ['SaaS Starter', 'Auth, billing, dashboard, admin, and analytics.', 'Next.js'],
   ['AI Chatbot', 'Model controls, conversation history, and prompt presets.', 'React'],
   ['E-commerce Store', 'Catalog, cart, checkout, and order admin.', 'Vue'],
   ['API Server', 'REST API starter with auth and database adapters.', 'Express'],
 ]
 
-const deploymentChecks = [
+const deploymentChecks: Array<[string, string, LucideIcon]> = [
   ['Frontend build', 'Passing', CheckCircle2],
   ['GitHub Pages', 'Connected', GitBranch],
   ['Custom domain', 'www.forgecloudide.com', Globe2],
@@ -132,7 +130,7 @@ function App() {
   )
 }
 
-function NavButton({ view, active, setView, icon: Icon, label }: { view: View; active: View; setView: (view: View) => void; icon: typeof LayoutDashboard; label: string }) {
+function NavButton({ view, active, setView, icon: Icon, label }: { view: View; active: View; setView: (view: View) => void; icon: LucideIcon; label: string }) {
   return <button className={active === view ? 'active' : ''} onClick={() => setView(view)}><Icon size={18} />{label}</button>
 }
 
@@ -190,7 +188,7 @@ function Ide({ activeFile, setActiveFile, aiLog }: { activeFile: string; setActi
 function Deployments() {
   return <section className="deploy-grid">
     <article className="panel wide"><h2>GitHub Pages deployment</h2><p>The repository now contains application source code for build detection. Use GitHub Pages for the frontend and connect a Node backend on Railway, Render, Cloud Run, or Fly.io.</p><div className="deploy-url"><Globe2 size={18} /> https://www.forgecloudide.com</div></article>
-    {deploymentChecks.map(([label, value, Icon]) => <article className="deploy-card" key={label as string}><Icon size={20} /><span>{label as string}</span><strong>{value as string}</strong></article>)}
+    {deploymentChecks.map(([label, value, Icon]) => <article className="deploy-card" key={label}><Icon size={20} /><span>{label}</span><strong>{value}</strong></article>)}
   </section>
 }
 
